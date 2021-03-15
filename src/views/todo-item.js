@@ -1,14 +1,20 @@
 import { LitElement, html } from "@polymer/lit-element";
 
 class TodoItem extends LitElement {
-  constructor() {
-    super();
-  }
+  //styles
 
   static get properties() {
     return {
       todo: { type: Object },
+      updateTodo: { type: Function },
     };
+  }
+
+  constructor() {
+    super();
+
+    this.todo = {};
+    this.updateTodo = () => {};
   }
 
   render() {

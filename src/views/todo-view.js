@@ -22,6 +22,8 @@ class TodoView extends LitElement {
     this.todos = [];
     this.filter = "";
     this.task = "";
+
+    this.updateTodo = this.updateTodo.bind(this);
   }
 
   addTodo() {
