@@ -1,5 +1,7 @@
 import { LitElement, html } from "@polymer/lit-element";
 
+import { getRandomString } from "../utlis/utils";
+
 const VisibilityFilters = {
   SHOW_ALL: "All",
   SHOW_ACTIVE: "Active",
@@ -27,6 +29,7 @@ class TodoView extends LitElement {
       this.todos = [
         ...this.todos,
         {
+          id: getRandomString(),
           task: this.task,
           complete: false,
         },
@@ -38,11 +41,9 @@ class TodoView extends LitElement {
     this.task = "";
   }
 
-  updateTodo(todoTask) {
+  updateTodo(id) {
     this.todos = this.todos.map((todo) => {
-      return todo.task === todoTask
-        ? { ...todo, complete: !todo.complete }
-        : todo;
+      return todo.id === id ? { ...todo, complete: !todo.complete } : todo;
     });
   }
 
@@ -68,6 +69,7 @@ class TodoView extends LitElement {
     switch (this.filter) {
       case VisibilityFilters.SHOW_ACTIVE: {
         const newTodos = todos.filter((todo) => !todo.complete);
+        console.log(newTodos);
         return newTodos;
       }
 
@@ -151,8 +153,8 @@ class TodoView extends LitElement {
                 (todo) =>
                   html`<todo-item
                     .todo="${{ ...todo }}"
-                    .updateTodo="${(todoTask) => {
-                      this.updateTodo(todoTask);
+                    .updateTodo="${(id) => {
+                      this.updateTodo(id);
                     }}"
                   ></todo-item>`
               )}

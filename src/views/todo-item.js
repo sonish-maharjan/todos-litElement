@@ -17,7 +17,7 @@ class TodoItem extends LitElement {
         type="checkbox"
         .checked=${this.todo.complete}
         @change="${(e) => {
-          this.updateTodo(this.todo.task);
+          this.updateTodo(this.todo.id);
         }}"
       />
       ${this.todo.task}
