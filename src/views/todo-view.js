@@ -38,9 +38,11 @@ class TodoView extends LitElement {
     this.task = "";
   }
 
-  updateTodo(index) {
-    this.todos = this.todos.map((todo, i) => {
-      return i === index ? { ...todo, complete: !todo.complete } : todo;
+  updateTodo(todoTask) {
+    this.todos = this.todos.map((todo) => {
+      return todo.task === todoTask
+        ? { ...todo, complete: !todo.complete }
+        : todo;
     });
   }
 
@@ -141,18 +143,16 @@ class TodoView extends LitElement {
         <button class="btn add-btn" @click="${this.addTodo}">Add Todo</button>
       </div>
 
-    
-
       ${
         this.applyFilter(this.todos).length === 0
           ? html`<p>No todos.</p>`
           : html` <div class="todo-list">
               ${this.applyFilter(this.todos).map(
-                (todo, index) =>
+                (todo) =>
                   html`<todo-item
-                    .todo="${{ ...todo, index }}"
-                    .updateTodo="${(index) => {
-                      this.updateTodo(index);
+                    .todo="${{ ...todo }}"
+                    .updateTodo="${(todoTask) => {
+                      this.updateTodo(todoTask);
                     }}"
                   ></todo-item>`
               )}

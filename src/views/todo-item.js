@@ -15,13 +15,12 @@ class TodoItem extends LitElement {
     return html`<div class="todo-item">
       <input
         type="checkbox"
-        ?checked="${this.todo.complete}"
+        .checked=${this.todo.complete}
         @change="${(e) => {
-          this.updateTodo(this.todo.index);
+          this.updateTodo(this.todo.task);
         }}"
       />
       ${this.todo.task}
-      <!-- ${this.todo.complete} ${typeof this.todo.complete} -->
     </div> `;
   }
 }
